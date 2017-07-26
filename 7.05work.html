@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 600px;
+				margin: 100px auto;
+			}
+			ul{
+				width: 100%;				
+				display: none;
+			}
+			li{
+				width: 100%;
+				height: 30px;
+				list-style: none;
+				border-bottom: 1px solid #999;				
+			}
+			li:hover{
+				background-color: #999;
+				cursor: pointer;
+			}
+			#box>input:nth-of-type(1){
+				width: 80%;
+				height: 40px;
+			}
+			#box>input:nth-of-type(2){
+				width: 19%;
+				height: 44px;
+				float: right;
+				background-color: dodgerblue;
+				color: white;
+				border: none;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<input type="text" name="t" id="t" value="" placeholder="请输入"/>
+			<input type="button" name="btn" id="btn" value="搜索" />
+		<ul id="list">
+			<!--<li>s</li>
+			<li>s</li>
+			<li>s</li>
+			<li></li>
+			<li></li>
+			<li></li>-->
+			
+		</ul>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+    var t = document.getElementById('t');	
+	var btn = document.getElementById('btn');
+	var list = document.getElementById('list');	
+	btn.onclick = function(){
+		list.style.display = 'block';
+		jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=',t.value,'&cb=fn','','','','','','','')
+	}
+	
+	function fn(data){
+		list.innerHTML = '';
+		console.log(data);			
+		arr = data.s;
+		for(var i=0;i<arr.length;i++){
+			var li = document.createElement('li');
+			li.innerHTML = '<a href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd='+arr[i]+'">'+arr[i]+'</a>'
+			list.appendChild(li);
+		}
+		//https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=d&rsv_pq=f14a248d000044c0&rsv_t=98b9x0T7AlKZ12dqM8YAz7QZmNjFYrVqY%2BFLGUQ9xcC0UW%2B3dQv5pu8XMuc&rqlang=cn&rsv_enter=1&rsv_sug3=5&rsv_sug1=4&rsv_sug7=100&rsv_sug2=0&inputT=63288&rsv_sug4=67623
+	
+	}
+
+
+    function jsonp(dat,val,cb,sugmode,json,p,sid,req,bs,csor){
+		var oS = document.createElement('script');		
+		oS.src = dat+val+cb+sugmode+json+p+sid+req+bs+csor;
+    	document.body.appendChild(oS);
+    }
+    //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E9%AA%86%E5%AE%89%E5%85%A8&sugmode=2&json=1&p=3&sid=1452_21096_22157&req=2&bs=%E9%AA%86%E5%AE%89%E5%85%A8&csor=3&cb=jQuery1102024122896741320887_1499266596174&_=1499266596176
+</script>
